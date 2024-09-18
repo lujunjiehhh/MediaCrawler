@@ -1,5 +1,5 @@
 表结构如下
-```sql
+```mysql
 DROP TABLE IF EXISTS `douyin_aweme`;
 CREATE TABLE `douyin_aweme`
 (
