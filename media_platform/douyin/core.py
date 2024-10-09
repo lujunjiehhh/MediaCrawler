@@ -21,12 +21,9 @@ from .login import DouYinLogin
 
 
 class DouYinCrawler(AbstractCrawler):
-    context_page: Page
-    dy_client: DOUYINClient
-    browser_context: BrowserContext
-
-    def __init__(self) -> None:
-        self.index_url = "https://www.douyin.com"
+    def __init__(self):
+        self.browser_contexts = []
+        self.dy_clients = []
 
     async def start(self) -> None:
         playwright_proxy_format, httpx_proxy_format = None, None
@@ -36,30 +33,40 @@ class DouYinCrawler(AbstractCrawler):
             playwright_proxy_format, httpx_proxy_format = self.format_proxy_info(ip_proxy_info)
 
         async with async_playwright() as playwright:
-            # Launch a browser context.
             chromium = playwright.chromium
-            self.browser_context = await self.launch_browser(
-                chromium,
-                None,
-                user_agent=None,
-                headless=config.HEADLESS
-            )
-            # stealth.min.js is a js script to prevent the website from detecting the crawler.
-            await self.browser_context.add_init_script(path="libs/stealth.min.js")
-            self.context_page = await self.browser_context.new_page()
-            await self.context_page.goto(self.index_url)
+            for _ in range(config.ACCOUNT_COUNT):
+                browser_context = await self.launch_browser(
+                    chromium,
+                    None,
+                    user_agent=None,
+                    headless=config.HEADLESS
+                )
+                await browser_context.add_init_script(path="libs/stealth.min.js")
+                context_page = await browser_context.new_page()
+                await context_page.goto(self.index_url)
 
-            self.dy_client = await self.create_douyin_client(httpx_proxy_format)
-            if not await self.dy_client.pong(browser_context=self.browser_context):
+                dy_client = await self.create_douyin_client(httpx_proxy_format)
                 login_obj = DouYinLogin(
                     login_type=config.LOGIN_TYPE,
-                    login_phone="",  # you phone number
-                    browser_context=self.browser_context,
-                    context_page=self.context_page,
+                    login_phone="",  # 每次登录时手动输入
+                    browser_context=browser_context,
+                    context_page=context_page,
                     cookie_str=config.COOKIES
                 )
                 await login_obj.begin()
-                await self.dy_client.update_cookies(browser_context=self.browser_context)
+                await dy_client.update_cookies(browser_context=browser_context)
+
+                self.browser_contexts.append(browser_context)
+                self.dy_clients.append(dy_client)
+
+                # 保存当前登录状态
+                await self.save_login_state(browser_context)
+
+                # 如果不是最后一个账号，刷新页面准备下一次登录
+                if _ < config.ACCOUNT_COUNT - 1:
+                    await context_page.reload()
+                    await asyncio.sleep(2)  # 等待页面加载
+
             crawler_type_var.set(config.CRAWLER_TYPE)
             if config.CRAWLER_TYPE == "search":
                 # Search for notes and retrieve their comment information.

@@ -48,8 +48,6 @@ def process_chunk(df_chunk):
 
                 print(f"共找到 {len(results)} 个相关视频")
                 return df[df["视频标题"].isin(results)]
-
-
             async def filter_comments(prompt, comment_data):
                 results = []
 
@@ -67,8 +65,6 @@ def process_chunk(df_chunk):
                         results.extend(task.result())
 
                 return results
-
-
             async def filter_comment(prompt, row):
                 video_info = f"<video_info>标题: {row['视频标题']} \n id: {row['视频id']} \n 描述: {row['视频描述']} </video_info>"
                 comments = f"<comments> {row['视频评论']} </comments>"
@@ -78,8 +74,6 @@ def process_chunk(df_chunk):
                 related_comments = json.loads(response)["related_comments"]
 
                 return related_comments
-
-
             # 调用 deepseek-chat API
             async def deepseek_chat(prompt, video_info, comment=""):
                 try:

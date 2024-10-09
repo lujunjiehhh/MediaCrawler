@@ -31,11 +31,6 @@ class DouYinLogin(AbstractLogin):
         self.cookie_str = cookie_str
 
     async def begin(self):
-        """
-            Start login douyin website
-            滑块中间页面的验证准确率不太OK... 如果没有特俗要求，建议不开抖音登录，或者使用cookies登录
-        """
-
         # popup login dialog
         await self.popup_login_dialog()
 
@@ -49,14 +44,13 @@ class DouYinLogin(AbstractLogin):
         else:
             raise ValueError("[DouYinLogin.begin] Invalid Login Type Currently only supported qrcode or phone or cookie ...")
 
-        # 如果页面重定向到滑动验证码页面，需要再次滑动滑块
+        # 检查滑动验证码
         await asyncio.sleep(6)
         current_page_title = await self.context_page.title()
         if "验证码中间页" in current_page_title:
             await self.check_page_display_slider(move_step=3, slider_level="hard")
 
         # check login state
-        utils.logger.info(f"[DouYinLogin.begin] login finished then check login state ...")
         try:
             await self.check_login_state()
         except RetryError:
@@ -67,6 +61,7 @@ class DouYinLogin(AbstractLogin):
         wait_redirect_seconds = 5
         utils.logger.info(f"[DouYinLogin.begin] Login successful then wait for {wait_redirect_seconds} seconds redirect ...")
         await asyncio.sleep(wait_redirect_seconds)
+
 
     @retry(stop=stop_after_attempt(600), wait=wait_fixed(1), retry=retry_if_result(lambda value: value is False))
     async def check_login_state(self):
@@ -121,6 +116,9 @@ class DouYinLogin(AbstractLogin):
         mobile_tap_ele = self.context_page.locator("xpath=//li[text() = '验证码登录']")
         await mobile_tap_ele.click()
         await self.context_page.wait_for_selector("xpath=//article[@class='web-login-mobile-code']")
+        mobile_input_ele = self.context_page.locator("xpath=//input[@placeholder='手机号']")
+        
+        self.login_phone = input("请输入登录手机号: ")
         mobile_input_ele = self.context_page.locator("xpath=//input[@placeholder='手机号']")
         await mobile_input_ele.fill(self.login_phone)
         await asyncio.sleep(0.5)

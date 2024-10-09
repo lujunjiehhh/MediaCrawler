@@ -12,6 +12,8 @@ CRAWLER_TYPE = "search"  # 爬取类型，search(关键词搜索) | detail(帖�
 # 是否开启 IP 代理
 ENABLE_IP_PROXY = False
 
+ACCOUNT_COUNT = 5  # 需要登录的账号数量
+
 # 代理IP池数量
 IP_PROXY_POOL_COUNT = 2
 
