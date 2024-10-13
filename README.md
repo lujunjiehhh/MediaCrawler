@@ -21,6 +21,10 @@
 - 完美的架构设计，更加易扩展，源码学习的价值更大
 
 
+MediaCrawler仓库白金赞助商:
+<a href="https://dashboard.ipcola.com/register?referral_code=atxtupzfjhpbdbl">⚡️【IPCola全球独家海外IP代理】⚡️新鲜的原生住宅代理，超高性价比，超多稀缺国家</a>
+> 【IPCola全球独家海外IP代理】使用此处阿江专属推荐码注册：atxtupzfjhpbdbl ，获得10%金额补贴。
+
 ## 功能列表
 | 平台  | 关键词搜索 | 指定帖子ID爬取 | 二级评论 | 指定创作者主页 | 登录态缓存 | IP代理池 | 生成评论词云图 |
 |-----|-------|---------|-----|--------|-------|-------|-------|
@@ -32,74 +36,21 @@
 | 贴吧  | ✅     | ✅       | ✅   | ✅      | ✅     | ✅     | ✅    |
 | 知乎  | ✅     |   ❌      | ✅   | ❌      | ✅     | ✅     | ✅    |
 
-
-## 使用方法
-
-### 创建并激活 python 虚拟环境
-   ```shell   
-   # 进入项目根目录
-   cd MediaCrawler
-   
-   # 创建虚拟环境
-   # 我的python版本是：3.9.6，requirements.txt中的库是基于这个版本的，如果是其他python版本，可能requirements.txt中的库不兼容，自行解决一下。
-   python -m venv venv
-   
-   # macos & linux 激活虚拟环境
-   source venv/bin/activate
-
-   # windows 激活虚拟环境
-   venv\Scripts\activate
-
-   ```
-
-### 安装依赖库
-
-   ```shell
-   poetry install
-   ```
-
-### 安装 playwright浏览器驱动
-
-   ```shell
-   playwright install
-   ```
-
-### 运行爬虫程序
-
-   ```shell
-   ### 项目默认是没有开启评论爬取模式，如需评论请在config/base_config.py中的 ENABLE_GET_COMMENTS 变量修改
-   ### 一些其他支持项，也可以在config/base_config.py查看功能，写的有中文注释
-   
-   # 从配置文件中读取关键词搜索相关的帖子并爬取帖子信息与评论
-   python main.py --platform xhs --lt qrcode --type search
-   
-   # 从配置文件中读取指定的帖子ID列表获取指定帖子的信息与评论信息
-   python main.py --platform xhs --lt qrcode --type detail
-  
-   # 打开对应APP扫二维码登录
-     
-   # 其他平台爬虫使用示例，执行下面的命令查看
-   python main.py --help    
-   ```
-
-### 数据保存
-- 支持关系型数据库Mysql中保存（需要提前创建数据库）
-    - 执行 `python db.py` 初始化数据库数据库表结构（只在首次执行）
-- 支持保存到csv中（data/目录下）
-- 支持保存到json中（data/目录下）
-
-
 ## 开发者服务
-- MediaCrawler视频课程：
-  > 视频课程介绍飞书文档链接：https://relakkes.feishu.cn/wiki/JUgBwdhIeiSbAwkFCLkciHdAnhh
-  > 如果你想很快入门这个项目，或者想了具体实现原理，我推荐你看看这个视频课程，从设计出发一步步带你如何使用，门槛大大降低
-  > 
-  > 同时也是对我开源的支持，如果你能支持我的课程，我将会非常开心～<br>
-  
+> 开源不易，希望大家可以Star一下MediaCrawler仓库、支持下我的课程、星球，十分感谢！！！ <br>
 
+- MediaCrawler源码剖析课程：
+  如果你想很快入门这个项目，或者想了具体实现原理，我推荐你看看这个我录制的视频课程，从设计出发一步步带你如何使用，门槛大大降低
+  - **抖音课程链接**（仅支持安卓）：https://v.douyin.com/iYeQFyAf/ 
+  - **B站课程链接**：https://www.bilibili.com/cheese/play/ss16569 
+   
+  (备注：课程介绍飞书文档链接：https://relakkes.feishu.cn/wiki/JUgBwdhIeiSbAwkFCLkciHdAnhh
+  <br>
+  <br>
+  
 - 知识星球：MediaCrawler相关问题最佳实践、爬虫逆向分享、爬虫项目实战、多年编程经验分享、爬虫编程技术问题提问。
   <p>
-  <img alt="xingqiu" src="static/images/星球qrcode.JPG" style="width: auto;height: 400px" >
+  <img alt="xingqiu" src="docs/static/images/星球qrcode.jpg" style="width: auto;height: 400px" >
   </p>
   
   星球精选文章(部分)：
@@ -111,23 +62,22 @@
   - [【独创】使用Playwright低成本获取某书X-s参数流程分析（当年的回忆录）](https://articles.zsxq.com/id_u4lcrvqakuc7.html)
   - [ MediaCrawler-基于抽象类设计重构项目缓存](https://articles.zsxq.com/id_4ju73oxewt9j.html)
   - [ 手把手带你撸一个自己的IP代理池](https://articles.zsxq.com/id_38fza371ladm.html) 
+  - [Python协程在并发场景下的幂等性问题](https://articles.zsxq.com/id_wocdwsfmfcmp.html)
+  - [错误使用 Python 可变类型带来的隐藏 Bug](https://articles.zsxq.com/id_f7vn89l1d303.html)
 
-  
+## 使用教程文档
+ 
+> MediaCrawler文档使用vitepress构建，包含使用方法、常见问题、加入项目交流群等。
+> 
+[MediaCrawler在线文档](https://nanmicoder.github.io/MediaCrawler/)
+
+
 ## 感谢下列Sponsors对本仓库赞助
-> 帮我注册下面的AI插件，保留一天，我可以得到3rmb的赞助，感谢您的支持
+> 【IPCola全球独家海外IP代理】使用此处阿江专属推荐码注册：atxtupzfjhpbdbl ，获得10%金额补贴。
+- <a href="https://dashboard.ipcola.com/register?referral_code=atxtupzfjhpbdbl">⚡️【IPCola全球独家海外IP代理】⚡️新鲜的原生住宅代理，超高性价比，超多稀缺国家</a>
 - <a href="https://sider.ai/ad-land-redirect?source=github&p1=mi&p2=kk">【Sider】全网最火的ChatGPT插件，我也免费薅羊毛用了快一年了，体验拉满。</a>
 
-成为赞助者，可以将您产品展示在这里，每天获得大量曝光，联系作者微信：yzglan
-
-## MediaCrawler爬虫项目交流群：
-<div id="join_wechat_group"> 
-
-> 备注github，会有拉群小助手自动拉你进群。  如果图片展示不出来或过期，可以直接添加我的微信号：yzglan，并备注github，会有拉群小助手自动拉你进
-
-<div style="max-width: 200px">  
-<p><img alt="直接添加我的微信号：yzglan" src="static/images/relakkes_weichat.JPG" style="width: 200px;height: 100%" ></p>
-</div>
-</div>
+成为赞助者，可以将您产品展示在这里，每天获得大量曝光，联系作者微信：yzglan 或 email：relakkes@gmail.com
 
 
 ## 打赏
@@ -136,42 +86,20 @@
 
 打赏时您可以备注名称，我会将您添加至打赏列表中。
 <p>
-  <img alt="打赏-微信" src="static/images/wechat_pay.jpeg" style="width: 200px;margin-right: 140px;" />
-  <img alt="打赏-支付宝" src="static/images/zfb_pay.png" style="width: 200px" />
+  <img alt="打赏-微信" src="docs/static/images/wechat_pay.jpeg" style="width: 200px;margin-right: 140px;" />
+  <img alt="打赏-支付宝" src="docs/static/images/zfb_pay.png" style="width: 200px" />
 </p>
 
-查看打赏列表 [点击跳转](#donate)
-
-
-## 运行报错常见问题Q&A
-> 遇到问题先自行搜索解决下，现在AI很火，用ChatGPT大多情况下能解决你的问题 [免费的ChatGPT](https://sider.ai/ad-land-redirect?source=github&p1=mi&p2=kk)  
-
-➡️➡️➡️ [常见问题](docs/常见问题.md)
-
-dy和xhs使用Playwright登录现在会出现滑块验证 + 短信验证，手动过一下
-
-## 项目代码结构
-➡️➡️➡️ [项目代码结构说明](docs/项目代码结构.md)
-
-## 代理IP使用说明
-➡️➡️➡️ [代理IP使用说明](docs/代理使用.md)
-
-## 词云图相关操作说明
-➡️➡️➡️ [词云图相关说明](docs/关于词云图相关操作.md)
-
-## 手机号登录说明
-➡️➡️➡️ [手机号登录说明](docs/手机号登录说明.md)
+查看打赏列表 [MediaCrawler捐赠名单](https://nanmicoder.github.io/MediaCrawler/捐赠名单.html)
 
 
 ## 爬虫入门课程
 我新开的爬虫教程Github仓库 [CrawlerTutorial](https://github.com/NanmiCoder/CrawlerTutorial) ，感兴趣的朋友可以关注一下，持续更新，主打一个免费.
 
-
 ## star 趋势图
-- 如果该项目对你有帮助，star一下 ❤️❤️❤️
+- 如果该项目对你有帮助，帮忙 star一下 ❤️❤️❤️，让更多的人看到MediaCrawler这个项目
 
 [![Star History Chart](https://api.star-history.com/svg?repos=NanmiCoder/MediaCrawler&type=Date)](https://star-history.com/#NanmiCoder/MediaCrawler&Date)
-
 
 
 ## 参考
@@ -180,41 +108,6 @@ dy和xhs使用Playwright登录现在会出现滑块验证 + 短信验证，手�
 - 短信转发 [参考仓库](https://github.com/pppscn/SmsForwarder)
 - 内网穿透工具 [ngrok](https://ngrok.com/docs/)
 
-## 捐赠信息
-<div id="donate">
-
-PS：如果打赏时请备注捐赠者，如有遗漏请联系我添加（有时候消息多可能会漏掉，十分抱歉）
-
-| 捐赠者         | 捐赠金额  | 捐赠日期       |
-|-------------|-------|------------|
-| Urtb*       | 100 元 | 2024-09-07 |
-| Tornado     | 66 元  | 2024-09-04 |
-| srhedbj     | 50 元  | 2024-08-20 |
-| *嘉          | 20 元  | 2024-08-15 |
-| *良          | 50 元  | 2024-08-13 |
-| *皓          | 50 元  | 2024-03-18 |
-| *刚          | 50 元  | 2024-03-18 |
-| *乐          | 20 元  | 2024-03-17 |
-| *木          | 20 元  | 2024-03-17 |
-| *诚          | 20 元  | 2024-03-17 |
-| Strem Gamer | 20 元  | 2024-03-16 |
-| *鑫          | 20 元  | 2024-03-14 |
-| Yuzu        | 20 元  | 2024-03-07 |
-| **宁         | 100 元 | 2024-03-03 |
-| **媛         | 20 元  | 2024-03-03 |
-| Scarlett    | 20 元  | 2024-02-16 |
-| Asun        | 20 元  | 2024-01-30 |
-| 何*          | 100 元 | 2024-01-21 |
-| allen       | 20 元  | 2024-01-10 |
-| llllll      | 20 元  | 2024-01-07 |
-| 邝*元         | 20 元  | 2023-12-29 |
-| 50chen      | 50 元  | 2023-12-22 |
-| xiongot     | 20 元  | 2023-12-17 |
-| atom.hu     | 20 元  | 2023-12-16 |
-| 一呆          | 20 元  | 2023-12-01 |
-| 坠落          | 50 元  | 2023-11-08 |
-
-</div>
 
 ## 免责声明
 <div id="disclaimer"> 
