@@ -1,0 +1,34 @@
+version: '1'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: media_crawler
+      MYSQL_USER: media_crawler
+      MYSQL_PASSWORD: media_crawler
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    # 端口
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis:latest
+    volumes:
+      - ./volumes/redis:/data
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: password
+
+  media_crawler:
+    image: media_crawler:latest
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+      - ~/.Xauthority:/root/.Xauthority:rw
+    ports:
+      - "5000:5000"

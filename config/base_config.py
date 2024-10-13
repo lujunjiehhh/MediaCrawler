@@ -1,5 +1,5 @@
 # 基础配置
-PLATFORM = "xhs"
+PLATFORM = "dy"
 KEYWORDS = "编程副业,编程兼职"
 LOGIN_TYPE = "qrcode"  # qrcode or phone or cookie
 COOKIES = ""
@@ -8,11 +8,9 @@ SORT_TYPE = "popularity_descending"
 # 具体值参见media_platform.xxx.field下的枚举值，暂时只支持抖音
 PUBLISH_TIME_TYPE = 0
 CRAWLER_TYPE = "search"  # 爬取类型，search(关键词搜索) | detail(帖子详情)| creator(创作者主页数据)
-
+DY_CLIENT_COUNT = 2
 # 是否开启 IP 代理
 ENABLE_IP_PROXY = False
-
-ACCOUNT_COUNT = 5  # 需要登录的账号数量
 
 # 代理IP池数量
 IP_PROXY_POOL_COUNT = 2

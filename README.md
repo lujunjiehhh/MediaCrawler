@@ -55,7 +55,7 @@
 ### 安装依赖库
 
    ```shell
-   pip install -r requirements.txt
+   poetry install
    ```
 
 ### 安装 playwright浏览器驱动
